@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { type ReactElement } from 'react'
-
+import Image from 'next/image'
 export default function Header (): ReactElement {
   return (
     <header>
@@ -29,7 +29,15 @@ export default function Header (): ReactElement {
 
         {/* Logo */}
         <div className="flex-grow flex justify-center">
-          <img src="/greenfield.svg" alt="Greenfield Times" className="h-10" />
+          <Image 
+            src="/greenfield.svg" 
+            alt="Greenfield Times" 
+            className="h-10"
+            priority={true}
+            width={0}
+            height={0}
+            style={{ width: 'auto', height: 'auto' }}
+          />
         </div>
 
         {/* Right Links */}

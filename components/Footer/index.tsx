@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { type ReactElement } from 'react'
+import Image from 'next/image'
 
 export default function Footer (): ReactElement {
   return (
@@ -7,7 +8,15 @@ export default function Footer (): ReactElement {
       <div className="max-w-[1200px] mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
           <div className="col-span-1 md:col-span-6">
-            <img src='/greenfield.svg' alt="Greenfield Times" className="h-8 mb-4 mx-auto md:mx-0" />
+           <Image
+            src='/greenfield.svg'
+            alt="Greenfield Times" 
+           className="h-8 mb-4 mx-auto md:mx-0"  
+           priority={true}
+           width={0}
+           height={0}
+           style={{ width: 'auto', height: 'auto' }}
+        />
           </div>
           <div>
             <h3 className="text-[#333] text-[13px] font-bold leading-[15px]">News</h3>

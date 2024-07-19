@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AppProps } from 'next/app';
 import '../styles/styles.css';
 
