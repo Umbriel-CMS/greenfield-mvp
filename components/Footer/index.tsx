@@ -5,7 +5,7 @@ import Image from 'next/image'
 export default function Footer (): ReactElement {
   return (
     <footer className="bg-white border-t border-gray-200">
-      <div className="max-w-[1200px] mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           <div className="col-span-1 lg:col-span-6 flex justify-center lg:justify-start">
             <Image
