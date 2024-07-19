@@ -47,6 +47,9 @@
   }
 }
 
+.bLeft {
+  border-left-width: 1px;
+}
 
 .twoBorderDivider1 {
   background-color: #fff;

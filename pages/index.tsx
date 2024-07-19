@@ -5,19 +5,20 @@ import Header from "@app/components/Header";
 import Footer from "@app/components/Footer";
 import { loadPages, receivePageBlocks } from "@app/api/fetch";
 import Head from "next/head";
+import { ReactElement } from "react";
 
-const HomePage = ({ createSlug, siteData }: HomePageProps) => {
+const HomePage = ({ createSlug, siteData }: HomePageProps): ReactElement => {
   const pageTitle = createSlug.length > 0 ? createSlug[0].title : "Default Title";
 
   return (
     <>
-     <Head>
+      <Head>
         <title>{pageTitle}</title>
       </Head>
       <div className="container mx-auto px-4">
         <Header />
         <div className="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-6">
-          <div className="flex-1 max-w-[1040px]">
+          <div className="flex-1 max-w-[1040px] mx-auto">
             {siteData.map(
               (block, index) =>
                 block.blockPosition !== "sidebar" && (
@@ -25,7 +26,7 @@ const HomePage = ({ createSlug, siteData }: HomePageProps) => {
                 )
             )}
           </div>
-          <div className="sidebar w-full lg:w-[calc(100%-1040px)] min-w-[300px] border-l border-gray-400 pl-6 space-y-4">
+          <div className="sidebar w-full lg:w-[calc(100%-1040px)] min-w-[280px] pl-6 space-y-6 bLeft mx-auto lg:mx-0">
             {siteData.map(
               (block, index) =>
                 block.blockPosition === "sidebar" && (
