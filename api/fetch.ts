@@ -3,7 +3,7 @@ import axios from "axios";
 
 const loadPages = async (): Promise<any[]> => {
   try {
-    const { data } = await axios.get("http://localhost:3001/listPages");
+    const { data } = await axios.get("https://api.umbrielcms.com.br/listPages");
     return data;
   } catch (err) {
     console.error("Error loading pages:", err);
@@ -13,7 +13,7 @@ const loadPages = async (): Promise<any[]> => {
 
 const receivePageBlocks = async (pageId: string): Promise<BlockData[]> => {
   try {
-    const { data } = await axios.get(`http://localhost:3001/page-blocks/${pageId}`);
+    const { data } = await axios.get(`https://api.umbrielcms.com.br/page-blocks/${pageId}`);
     return data;
   } catch (err) {
     console.error("Error loading page blocks:", err);
@@ -22,4 +22,3 @@ const receivePageBlocks = async (pageId: string): Promise<BlockData[]> => {
 };
 
 export { loadPages, receivePageBlocks }
-
