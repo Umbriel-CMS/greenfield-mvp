@@ -1,10 +1,12 @@
-'use client'
-
 import '@fontsource-variable/rubik'
 import '@fontsource-variable/lora'
 import '@fontsource-variable/inter'
 
-export const theme = {
+import { ThemeProvider, StyleSheetManager } from 'styled-components'
+import { type PropsWithChildren } from 'react'
+import isPropValid from '@emotion/is-prop-valid'
+
+const theme = {
   colors: {
     blueDark: '#142634',
     white: '#FFFFFF',
@@ -34,11 +36,22 @@ export const theme = {
     }
   },
   fonts: {
-    fontPrimary: 'Noto Sans Variable',
-    fontSecondary: 'Roboto',
-    fontThird: 'Poppins',
     heading: 'Rubik Variable',
     heading2: 'Inter Variable',
     mvpFont: 'Lora Variable'
   }
+}
+
+export default function CustomStyles ({ children }: PropsWithChildren): JSX.Element {
+  return (
+    <StyleSheetManager
+      enableVendorPrefixes
+      shouldForwardProp={(propName, elementToBeRendered) =>
+        typeof elementToBeRendered === 'string' ? isPropValid(propName) : true
+      }
+    >
+       { /* @ts-expect-ignore */ }
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </StyleSheetManager>
+  )
 }

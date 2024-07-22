@@ -5,24 +5,24 @@ import Image from 'next/image'
 export default function Footer (): ReactElement {
   return (
     <footer className="bg-white border-t border-gray-200">
-      <div className="mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           <div className="col-span-1 lg:col-span-6 flex justify-center lg:justify-start">
             <Image
               src='/greenfield.svg'
               alt="Greenfield Times"
-              className="h-8 mb-4"
+              className="mb-1"
               priority={true}
               width={0}
               height={0}
-              style={{ width: 'auto', height: 'auto' }}
+              style={{ width: '100%', height: 'auto', maxWidth: 185 }}
             />
           </div>
           <div>
             <h3 className="text-[#333] text-[13px] font-bold leading-[15px]">News</h3>
             <ul className="mt-4 space-y-2">
               {[...Array(6)].map((_, index) => (
-                <li key={index} className="text-black text-[14px] font-medium leading-[16px] hover:underline transition-all cursor-pointer">Home Page</li>
+                <li key={index} className="text-black text-[14px] font-inter font-medium leading-[16px] hover:underline transition-all cursor-pointer">Home Page</li>
               ))}
             </ul>
           </div>
@@ -30,7 +30,7 @@ export default function Footer (): ReactElement {
             <h3 className="text-[#333] text-[13px] font-bold leading-[15px]">Arts</h3>
             <ul className="mt-4 space-y-2">
               {[...Array(6)].map((_, index) => (
-                <li key={index} className="text-black text-[14px] font-medium leading-[16px] hover:underline transition-all cursor-pointer">Best Sellers Book List</li>
+                <li key={index} className="text-black text-[14px] font-inter font-medium leading-[16px] hover:underline transition-all cursor-pointer">Best Sellers Book List</li>
               ))}
             </ul>
           </div>
@@ -38,7 +38,7 @@ export default function Footer (): ReactElement {
             <h3 className="text-[#333] text-[13px] font-bold leading-[15px]">Lifestyle</h3>
             <ul className="mt-4 space-y-2">
               {[...Array(6)].map((_, index) => (
-                <li key={index} className="text-black text-[14px] font-medium leading-[16px] hover:underline transition-all cursor-pointer">Restaurant Reviews</li>
+                <li key={index} className="text-black text-[14px] font-inter font-medium leading-[16px] hover:underline transition-all cursor-pointer">Restaurant Reviews</li>
               ))}
             </ul>
           </div>

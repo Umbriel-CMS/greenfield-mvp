@@ -2,18 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  outline: 0;
-  box-sizing: border-box;
+@font-face {
+  font-family: 'ImperialNormal';
+  src: url('/fonts/imperial-normal-500.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
 }
 
+@font-face {
+  font-family: 'Cheltenham700Italic';
+  src: url('/fonts/cheltenham-italic-700.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* CSS global */
 .container {
-  max-width: 1500px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
   height: 100%;
+  width: 100%;
+  padding: 0 16px; /* Adicione preenchimento para evitar que o conteúdo fique colado nas bordas */
 }
 
 .layout {
@@ -30,7 +39,7 @@
 
 .sidebar {
   width: calc(100% - 920px); /* 900px main + 20px gap */
-  min-width: 300px;
+  min-width: 240px;
 }
 
 @media (max-width: 1200px) {

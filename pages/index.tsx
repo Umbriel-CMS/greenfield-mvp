@@ -8,7 +8,14 @@ import Head from "next/head";
 import { ReactElement } from "react";
 
 const HomePage = ({ createSlug, siteData }: HomePageProps): ReactElement => {
+  console.log({siteData})
   const pageTitle = createSlug.length > 0 ? createSlug[0].title : "Default Title";
+
+  const isTemplateMainWithSidebar = siteData.some(
+    (block) => block.template === "TemplateMainWithSidebar"
+  );
+
+  console.log(isTemplateMainWithSidebar)
 
   return (
     <>
@@ -26,7 +33,7 @@ const HomePage = ({ createSlug, siteData }: HomePageProps): ReactElement => {
                 )
             )}
           </div>
-          <div className="sidebar w-full lg:w-[calc(100%-1040px)] min-w-[280px] pl-6 space-y-6 bLeft mx-auto lg:mx-0">
+          <div className="sidebar w-full lg:w-[calc(100%-1040px)] min-w-[240px] pl-6 space-y-6 mx-auto lg:mx-0">
             {siteData.map(
               (block, index) =>
                 block.blockPosition === "sidebar" && (
