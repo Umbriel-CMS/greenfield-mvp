@@ -76,3 +76,16 @@
   height: 1px;
   margin-top: 1px;
 }
+
+.sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.sidebar {
+  border-left: 1px solid #DFDFDF;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}

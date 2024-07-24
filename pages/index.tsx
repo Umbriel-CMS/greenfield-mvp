@@ -1,31 +1,39 @@
 import { GetServerSideProps } from "next";
 import { PageBlock } from "@umbriel/components";
-import { BlockData, HomePageProps } from "../types";
+import { BlockData, SiteProps } from "../types";
 import Header from "@app/components/Header";
 import Footer from "@app/components/Footer";
 import { loadPages, receivePageBlocks } from "@app/api/fetch";
-import Head from "next/head";
 import { ReactElement } from "react";
+import dynamic from "next/dynamic";
 
-const HomePage = ({ createSlug, siteData }: HomePageProps): ReactElement => {
-  console.log({siteData})
-  const pageTitle = createSlug.length > 0 ? createSlug[0].title : "Default Title";
+const SeoProvider = dynamic(() => import("@app/providers/SEO"));
 
-  const isTemplateMainWithSidebar = siteData.some(
-    (block) => block.template === "TemplateMainWithSidebar"
+const HomePage = ({
+  createSlug,
+  siteData,
+  editorialProps,
+}: SiteProps): ReactElement => {
+  if (typeof window !== undefined) {
+    console.log("[SiteDataProps]", siteData);
+  }
+
+  const sidebarBlocks = siteData.filter(
+    (block) => block.blockPosition === "sidebar"
   );
 
-  console.log(isTemplateMainWithSidebar)
+  const pageTitle =
+    createSlug[0]?.slug === "umbriel-pageblock"
+      ? "The Greenfield Times"
+      : "Default Title";
 
   return (
-    <>
-      <Head>
-        <title>{pageTitle}</title>
-      </Head>
+    <SeoProvider slugData={createSlug} customPageTitle={pageTitle}>
       <div className="container mx-auto px-4">
-        <Header />
+        {/** @ts-ignore  */}
+        <Header editorial={editorialProps} />
         <div className="flex flex-col lg:flex-row mt-4 space-y-4 lg:space-y-0 lg:space-x-6">
-          <div className="flex-1 max-w-[1040px] mx-auto">
+          <div className="flex-1 max-w-[1040px] mx-0">
             {siteData.map(
               (block, index) =>
                 block.blockPosition !== "sidebar" && (
@@ -33,14 +41,13 @@ const HomePage = ({ createSlug, siteData }: HomePageProps): ReactElement => {
                 )
             )}
           </div>
-          <div className="sidebar w-full lg:w-[calc(100%-1040px)] min-w-[240px] pl-6 space-y-6 mx-auto lg:mx-0">
-            {siteData.map(
-              (block, index) =>
-                block.blockPosition === "sidebar" && (
-                  <PageBlock key={index} blocksData={[block]} />
-                )
-            )}
-          </div>
+          {sidebarBlocks.length > 0 && (
+            <div className="sidebar w-full lg:w-[calc(100%-1040px)] min-w-[240px] pl-6 space-y-6 mx-auto lg:mx-0">
+              {sidebarBlocks.map((block, index) => (
+                <PageBlock key={index} blocksData={[block]} />
+              ))}
+            </div>
+          )}
         </div>
         <div className="mt-6">
           <div className="twoBorderDivider1"></div>
@@ -48,7 +55,7 @@ const HomePage = ({ createSlug, siteData }: HomePageProps): ReactElement => {
         </div>
         <Footer />
       </div>
-    </>
+    </SeoProvider>
   );
 };
 
@@ -56,9 +63,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const slugFromURL = "umbriel-pageblock";
 
   try {
-    const [pagesData, siteData] = await Promise.all([
+    const [pagesData, siteData, editorials] = await Promise.all([
       loadPages(),
       receivePageBlocks(slugFromURL),
+      fetch(`${process.env.NEXT_PUBLIC_UMBRIEL_API}/editorials`).then((res) =>
+        res.json()
+      ),
     ]);
 
     const currentPageData = pagesData.find(
@@ -77,6 +87,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {
         createSlug: currentPageData ? [currentPageData] : [],
         siteData: filteredSiteData ? filteredSiteData : [],
+        editorialProps: editorials.editorials || [],
       },
     };
   } catch (error) {
