@@ -1,49 +1,54 @@
 export interface Article {
-  id: string
-  title: string
-  subtitle: string
-  author: string | null
-  email: string | null
+  id: string;
+  title: string;
+  subtitle: string;
+  author: string | null;
+  email: string | null;
   content: {
     image: {
-      desktop_image_path: string
-      image_mobile_path: string
-    }
-  }
-  slug: string
-  schedulePublication: string | null
-  articleBody: string
-  status: string
-  isAward: boolean
-  metadata: any
-  pageBgColor: string
-  articleLayoutStruct: any
-  created_at: string
-  updated_at: string
-  editorial: {
-    id: string
-    title: string
-    description: string
-    slug: string
-  }
+      desktop_image_path: string;
+      image_mobile_path: string;
+    };
+  };
+  slug: string;
+  schedulePublication: string | null;
+  articleBody: string;
+  status: string;
+  isAward: boolean;
+  metadata: any;
+  pageBgColor: string;
+  articleLayoutStruct: any;
+  created_at: string;
+  updated_at: string;
+  editorialId: string;
+  static_page_id?: string;
+  editorialName?: string;
   links?: Array<{
-    title: string
-    url: string
-  }>
+    title: string;
+    url: string;
+  }>;
+  articleEstimatedReadTime?: string;
+  isArticleLive?: boolean;
+  editorial: {
+    id: string;
+    title: string;
+    description: string;
+    slug: string;
+  };
 }
 
 export interface Template5050Props {
-  descriptions: string[]
+  descriptions: string[];
   headingsProps?: {
-    fontSize: string | number
-    fontWeight: string | number
-    transform: string
-  }
+    fontSize: string | number;
+    fontWeight: string | number;
+    transform: string;
+  };
 }
 
 export interface BlockConfig {
-  layout: string
-  columns: number[]
+  layout: string;
+  columns: number[];
 }
 
 export interface BlockData {
@@ -56,11 +61,7 @@ export interface BlockData {
     components: any[];
   };
   pageId: string;
-  articleId?: string;
-  config: {
-    layout: string;
-    columns: number[];
-  };
+  config: BlockConfig;
   template50?: {
     descriptions?: string[];
     headingsProps?: {
@@ -70,12 +71,37 @@ export interface BlockData {
     };
   };
   blockTitle?: string;
-  template: string;
+  template?: string;
+  articleId?: string | null;
+  id?: string;
+  created_at?: string;
+  updated_at?: string;
+  templateSlot100FeaturedRelatedProps?: {
+    blockSubject: string;
+    bgColor: string;
+    blockSubjectColor: string;
+    articleTitleColor: string;
+    blockBorderRadius: string;
+  };
+  editorialObject?: {
+    id: string;
+    title: string;
+    description: string;
+    slug: string;
+  };
+}
+export interface EditorialProps {
+  editorial: {
+    id: string;
+    title: string;
+    description: string;
+    slug: string;
+    articles: Article[];
+  };
 }
 export interface PageBlockProps {
-  blocksData: BlockData[]
+  blocksData: BlockData[];
 }
-
 
 export type PageProps = {
   id: string;
@@ -86,7 +112,8 @@ export type PageProps = {
   updated_at: string;
 };
 
-export type HomePageProps = {
+export type SiteProps = {
   createSlug: PageProps[];
   siteData: BlockData[];
+  editorialProps?: EditorialProps[];
 };
